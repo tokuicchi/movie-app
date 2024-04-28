@@ -10,9 +10,14 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($mediaType, $mediaId)
     {
-        //
+        $reviews = Review::with('user')
+            ->where('media_type', $mediaType)
+            ->where('media_id', $mediaId)
+            ->get();
+
+        return response()->json($reviews);
     }
 
     /**
